@@ -1,0 +1,90 @@
+
+Q1- How can you convert the table into 1NF ?
+
+food_code and food_description has multiple values which is against to first rule of the 1NF.
+So we should simplify it until every column has atomic values.
+
+
++----------+-----------+-------------+----------------+-----------+-------------+------------+-------------------+-----------+------------------+
+| index_no | member_id | member_name | member_address | dinner_id | dinner_date | venue_code | venue_description | food_code | food_description |
++----------+-----------+-------------+----------------+-----------+-------------+------------+-------------------+-----------+------------------+
+|        1 |         1 | Amit        | 325 Max park   | D00001001 | 2020-03-15  | B01        | Grand Ball Room   | C1        | Curry            |
+|        2 |         1 | Amit        | 325 Max park   | D00001001 | 2020-03-15  | B01        | Grand Ball Room   | C2        | Cake             |
+|        3 |         2 | Ben         | 24 Hudson lane | D00001002 | 2020-03-15  | B02        | Zoku Roof Top     | S1        | Soup             |
+|        4 |         2 | Ben         | 24 Hudson lane | D00001002 | 2020-03-15  | B02        | Zoku Roof Top     | C2        | Cake             |
+|        5 |         3 | Cristina    | 516 6th Ave    | D00001002 | 2020-03-15  | B02        | Zoku Roof Top     | S1        | Soup             |
+|        6 |         3 | Cristina    | 516 6th Ave    | D00001002 | 2020-03-15  | B02        | Zoku Roof Top     | C2        | Cake             |
+|        7 |         4 | Dan         | 89 John St     | D00001003 | 2020-03-20  | B03        | Goat Farm         | P1        | Pie              |
+|        8 |         4 | Dan         | 89 John St     | D00001003 | 2020-03-20  | B03        | Goat Farm         | T1        | Tea              |
+|        9 |         4 | Dan         | 89 John St     | D00001003 | 2020-03-20  | B03        | Goat Farm         | M1        | Mousse           |
+|       10 |         5 | Ema         | 91 Pixar St    | D00001003 | 2020-03-20  | B03        | Goat Farm         | P1        | Pie              |
+|       11 |         5 | Ema         | 91 Pixar St    | D00001003 | 2020-03-20  | B03        | Goat Farm         | T1        | Tea              |
+|       12 |         5 | Ema         | 91 Pixar St    | D00001003 | 2020-03-20  | B03        | Goat Farm         | M1        | Mousse           |
+|       13 |         6 | Fatima      | 56 8th Ave     | D00001004 | 2020-03-20  | B04        | Mama's Kitchen    | F1        | Falafal          |
+|       14 |         6 | Fatima      | 56 8th Ave     | D00001004 | 2020-03-20  | B04        | Mama's Kitchen    | M1        | Mousse           |
+|       15 |         7 | Gabor       | 54 Vivaldi St  | D00001005 | 2020-03-20  | B05        | Hungry Hungary    | G1        | Goulash          |
+|       16 |         7 | Gabor       | 54 Vivaldi St  | D00001005 | 2020-03-20  | B05        | Hungry Hungary    | P2        | Pasca            |
+|       17 |         8 | Hema        | 9 Peter St     | D00001003 | 2020-03-20  | B03        | Goat Farm         | P1        | Pie              |
+|       18 |         8 | Hema        | 9 Peter St     | D00001003 | 2020-03-20  | B03        | Goat Farm         | T1        | Tea              |
+|       19 |         8 | Hema        | 9 Peter St     | D00001003 | 2020-03-20  | B03        | Goat Farm         | M1        | Mousse           |
++----------+-----------+-------------+----------------+-----------+-------------+------------+-------------------+-----------+------------------+
+
+
+Q2- What are the super, candidate, primary keys ? 
+
+Primary Key  Composite of (member_id + food_code)
+
+The candidate keys are [{member_id, dinner_id}, {member_name*, dinner_id}, member_id]
+
+
+Q3- What are the potential relationships between different possible tables ?
+
+The relationships between tables is "many-to-many"
+
+Q4- How can you develop the set of 2NF tables?
+Q5- How can you develop the set of 3NF tables?
+ 
+Relation Table
++-----------+-----------+------------+-----------+
+| member_id | dinner_id | venue_code | food_code |
++-----------+-----------+------------+-----------+
+|         1 | D00001001 | B01        | C1        |
+|         1 | D00001001 | B01        | C2        |
+|         2 | D00001002 | B02        | S1        |
+|         2 | D00001002 | B02        | C2        |
+|         3 | D00001002 | B02        | S1        |
+|         3 | D00001002 | B02        | C2        |
+|         4 | D00001003 | B03        | P1        |
+|         4 | D00001003 | B03        | T1        |
+|         4 | D00001003 | B03        | M1        |  
++-----------+-----------+------------+-----------+
+
+Dinner:
++-----------+-------------+
+| dinner_id | dinner_date |
++-----------+-------------+
+| D00001001 | 2020-03-15  |
+| D00001001 | 2020-03-15  |
+| D00001002 | 2020-03-15  |
+| D00001002 | 2020-03-15  |
+| D00001002 | 2020-03-15  |
+| D00001002 | 2020-03-15  |
+| D00001003 | 2020-03-20  |
+| D00001003 | 2020-03-20  |
+| D00001003 | 2020-03-20  |
++-----------+-------------+
+
+Venue:
++------------+-------------------+
+| venue_code | venue_description |
++------------+-------------------+
+| B01        | Grand Ball Room   |
+| B01        | Grand Ball Room   |
+| B02        | Zoku Roof Top     |
+| B02        | Zoku Roof Top     |
+| B02        | Zoku Roof Top     |
+| B02        | Zoku Roof Top     |
+| B03        | Goat Farm         |
+| B03        | Goat Farm         |
+| B03        | Goat Farm         |
++------------+-------------------+
